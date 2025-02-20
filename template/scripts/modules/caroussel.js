@@ -1,39 +1,39 @@
 
-export function renderTrailers(movie, num) {
-    const iFrameRef = document.createElement(`iframe`);
-    iFrameRef.classList.add(`trailers__video`, `trailers__video-${num}`);
-    iFrameRef.src = movie.Trailer_link;
-    document.querySelector(`.trailers__container`).appendChild(iFrameRef);
-
-    const trailerList = document.querySelectorAll(`.trailers__video`);
-    const trailerArray = Array.from(trailerList);
+export function initializeCarousel() {
+    const carousel = document.querySelector('.carousel');
+    const slides = document.querySelectorAll('.carousel-item');
+    const prevButton = document.querySelector('.carousel-prev');
+    const nextButton = document.querySelector('.carousel-next');
     
-    document.querySelectorAll(`.trailers__arrow`).forEach(arrow => {
-        arrow.addEventListener(`click`, (event) => {
-            changeTrailer(event, trailerList, trailerArray);
-        });
-    })
-}
+    console.log("Carousel found:", carousel);
+    console.log("Slides found:", slides.length);
+    console.log("Prev button found:", prevButton);
+    console.log("Next button found:", nextButton);
 
-function changeTrailer(event, trailerList, trailerArray) {
-    if (event.target.dataset.direction === `right`) {
-        trailerArray.push(trailerArray.shift());
-    } else if (event.target.dataset.direction === `left`) {
-        trailerArray.unshift(trailerArray.pop());
+    if (!carousel || slides.length === 0 || !prevButton || !nextButton) {
+        console.log("Carousel elements are missing, skipping initialization.");
+        return;
     }
 
-    trailerList.forEach(item => {
-        item.classList.remove(
-            `trailers__video-1`,
-            `trailers__video-2`,
-            `trailers__video-3`,
-            `trailers__video-4`,
-            `trailers__video-5`
-        );
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+        updateCarousel();
     });
 
-    trailerArray.slice(0, 5).forEach((item, i) => {
-        item.classList.add(`trailers__video-${i + 1}`)
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
     });
+
+    updateCarousel();
 }
+
 

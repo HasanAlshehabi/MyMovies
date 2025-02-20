@@ -82,3 +82,54 @@ body {
     border: none;
     cursor: pointer;
 }
+
+.fav-star {
+       font-size: 2rem;
+       cursor: pointer;
+       position: absolute;
+       top: 10px;
+       right: 10px;
+       color: gray;
+       transition: color 0.3s ease;
+     }
+
+.fav-star.filled {
+    color: gold;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolumner per rad */
+    gap: 20px; /* Avstånd mellan korten */
+    justify-content: center;
+    padding: 20px;
+}
+
+.movie-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 10px;
+    text-align: center;
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Responsiv design */
+@media (max-width: 1024px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolumner på surfplattor */
+    }
+}
+
+@media (max-width: 600px) {
+    .card-container {
+        grid-template-columns: 1fr; /* 1 kolumn på mobil */
+    }
+}
