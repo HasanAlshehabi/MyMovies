@@ -16,7 +16,7 @@ export function shuffleArray(array){
 
 export async function searchMovies(query) {
     try {
-        const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=f15342f3`);
+        const response = await fetch(`http://www.omdbapi.com/?apikey=f15342f3&s=${query}`);
         if (!response.ok) throw new Error('Failed to fetch search results');
         const data = await response.json();
         return data.Search || [];

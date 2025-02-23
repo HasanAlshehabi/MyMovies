@@ -28,6 +28,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         movies.forEach((movie, index) => {
             renderTrailers(movie, index + 1);
         });
+        const searchForm = document.getElementById('searchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const query = document.getElementById('searchInput').value.trim();
+                if (query) {
+                    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                }
+            });
+        }
     }
 
     if (window.location.pathname.includes('search.html')) {
