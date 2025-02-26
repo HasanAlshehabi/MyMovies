@@ -25,3 +25,15 @@ export async function searchMovies(query) {
         return [];
     }
 }
+
+export async function fetchMovieDetails(imdbID) {
+    try{
+        const response = await fetch (`https://www.omdbapi.com/?apikey=f15342f3&plot=full&i=${imdbID}`);
+        if (!response.ok) throw new Error('Failed to fetch movies details')
+           return await response.json();
+    }
+    catch (error){
+        console.error(error);
+        return [];
+    }
+}

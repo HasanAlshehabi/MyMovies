@@ -1,4 +1,4 @@
-import { fetchTopMovies, searchMovies} from './modules/api.js';
+import { fetchTopMovies, searchMovies, fetchMovieDetails} from './modules/api.js';
 import { createMovieCard } from './components/movieCard.js';
 import { clearContainer, appendToContainer } from './utils/domUtils.js';
 import { initializeCarousel } from './modules/caroussel.js';
@@ -51,23 +51,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             appendToContainer(container, movieCards);
         }
     }
-    if (window.location.pathname.includes('favorites.html')) {
-    const container = document.getElementById('cardContainer');
-    clearContainer(container);
-
-    const favoriteIds = getFavorites();
-
-    if (favoriteIds.length === 0) {
-        container.innerHTML = "<p>No favorite movies yet!</p>";
-    } else {
-        favoriteIds.forEach(async (movieId) => {
-            const response = await fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=f15342f3`);
-            const movie = await response.json();
-            const movieCard = createMovieCard(movie);
-            container.appendChild(movieCard);
-        });
-    }
-}
 });
 
 if (window.location.pathname.includes('favorites.html')) {
@@ -89,6 +72,35 @@ if (window.location.pathname.includes('favorites.html')) {
                 if (!document.querySelector(`[data-id="${movie.imdbID}"]`)) {
                     container.appendChild(movieCard);
                 }
+            }
+        }
+    });
+}
+
+if (window.location.pathname.includes('movie.html')) {
+    document.addEventListener('DOMContentLoaded', async () => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const movieId = searchParams.get('id');
+
+        console.log("Movie ID from URL:", movieId); // Debugging
+
+        if (movieId) {
+            const movie = await fetchMovieDetails(movieId);
+
+            console.log("Fetched movie details:", movie); // Debugging
+
+            if (movie && movie.Title) {
+                // Populate individual elements in movie.html
+                document.getElementById('movieTitle').textContent = movie.Title;
+                document.getElementById('moviePoster').src = movie.Poster;
+                document.getElementById('moviePoster').alt = `Poster of ${movie.Title}`;
+                document.getElementById('moviePlot').textContent = movie.Plot;
+                document.getElementById('movieYear').textContent = movie.Year;
+                document.getElementById('movieGenre').textContent = movie.Genre;
+                document.getElementById('movieDirector').textContent = movie.Director;
+                document.getElementById('movieActors').textContent = movie.Actors;
+            } else {
+                document.getElementById('movieInformation').innerHTML = "<p>Movie details could not be loaded.</p>";
             }
         }
     });
