@@ -99,6 +99,13 @@ if (window.location.pathname.includes('movie.html')) {
                 document.getElementById('movieGenre').textContent = movie.Genre;
                 document.getElementById('movieDirector').textContent = movie.Director;
                 document.getElementById('movieActors').textContent = movie.Actors;
+                document.getElementById('movieAwards').textContent = movie.Awards;
+                document.getElementById('movieBoxOffice').textContent = movie.BoxOffice;
+                document.getElementById('movieCountry').textContent = movie.Country;
+                document.getElementById('movieLanguage').textContent = movie.Language;
+                document.getElementById('movieRated').textContent = movie.Rated;
+                document.getElementById('movieRuntime').textContent = movie.Runtime;
+                document.getElementById('movieImdbRating').textContent = movie.imdbRating;
             } else {
                 document.getElementById('movieInformation').innerHTML = "<p>Movie details could not be loaded.</p>";
             }

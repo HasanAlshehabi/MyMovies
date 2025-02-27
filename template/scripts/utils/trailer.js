@@ -36,6 +36,3 @@ function changeTrailer(event, trailerList, trailerArray) {
         item.classList.add(`trailers__video-${i + 1}`)
     });
 }
-export function shuffleArray(array){
-    return array.sort (()=> Math.random() - 0.5);
-}
