@@ -25,4 +25,24 @@ export function toggleFavorite(movieId, starElement) {
         addToFavorites(movieId);
         starElement.classList.add('filled');
     }
+
+}
+
+export function createFavoriteStar(movieId) {
+    const favorites = getFavorites();
+    const favStar = document.createElement('span');
+    favStar.classList.add('fav-star');
+    favStar.dataset.id = movieId;
+    favStar.textContent = '★';
+
+    if (favorites.includes(movieId)) {
+        favStar.classList.add('filled');
+    }
+
+    favStar.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleFavorite(movieId, favStar);
+    });
+
+    return favStar;
 }

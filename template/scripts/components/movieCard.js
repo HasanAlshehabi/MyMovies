@@ -1,4 +1,4 @@
-import { getFavorites, toggleFavorite} from '../utils/favorite.js';
+import { getFavorites, toggleFavorite,} from '../utils/favorite.js';
 
 export function createMovieCard(movie) {
     const card = document.createElement('div');

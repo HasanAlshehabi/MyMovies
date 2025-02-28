@@ -2,7 +2,7 @@ import { fetchTopMovies, searchMovies, fetchMovieDetails} from './modules/api.js
 import { createMovieCard } from './components/movieCard.js';
 import { clearContainer, appendToContainer } from './utils/domUtils.js';
 import { initializeCarousel } from './modules/caroussel.js';
-import { getFavorites} from './utils/favorite.js';
+import { getFavorites, createFavoriteStar} from './utils/favorite.js';
 import { renderTrailers } from './utils/trailer.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 if (window.location.pathname.includes('favorites.html')) {
-    document.addEventListener('DOMContentLoaded', async () => {
         const container = document.getElementById('cardContainer');
         clearContainer(container);
 
@@ -74,11 +73,9 @@ if (window.location.pathname.includes('favorites.html')) {
                 }
             }
         }
-    });
-}
+    };
 
 if (window.location.pathname.includes('movie.html')) {
-    document.addEventListener('DOMContentLoaded', async () => {
         const searchParams = new URLSearchParams(window.location.search);
         const movieId = searchParams.get('id');
 
@@ -106,9 +103,9 @@ if (window.location.pathname.includes('movie.html')) {
                 document.getElementById('movieRated').textContent = movie.Rated;
                 document.getElementById('movieRuntime').textContent = movie.Runtime;
                 document.getElementById('movieImdbRating').textContent = movie.imdbRating;
-            } else {
-                document.getElementById('movieInformation').innerHTML = "<p>Movie details could not be loaded.</p>";
+            
+                const favoriteStar = createFavoriteStar(movieId);
+                document.querySelector('.movie-info').prepend(favoriteStar);
             }
         }
-    });
-}
+    };
