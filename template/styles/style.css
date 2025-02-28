@@ -1,5 +1,5 @@
 @import url('./carousel.css');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* Variables */
 :root {
@@ -106,13 +106,17 @@ body {
 }
 
 .movie-card {
-    background: #fff;
+    background:#fff;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     padding: 10px;
     text-align: center;
+}
+
+.movie-card:hover{
+    transform: scale(1.04);
 }
 
 .movie-card img {
@@ -130,9 +134,10 @@ body {
     max-width: 900px;
     margin: 50px auto;
     padding: 20px;
-    background: #fff;
+    background: transparent;
     border-radius: 8px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 /* Movie poster styling */
@@ -146,14 +151,14 @@ body {
 /* Movie information styling */
 .movie-info {
     flex: 1;
-    color: #333;
-    font-family: 'Arial', sans-serif;
+    color: white;
+    font-family:"poppins";
     font-size: 14px; /* Smaller text */
 }
 
 /* Title styling */
 #movieTitle {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -175,6 +180,14 @@ body {
     font-size: 16px;
     font-weight: bold;
     color: #E67E22;
+}
+
+.plot-container {
+    border: 2px solid white;
+    border-left: none;
+    border-right: none;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 /* Responsive Design - Stack on mobile */
